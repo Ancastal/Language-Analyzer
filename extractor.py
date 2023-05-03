@@ -1,5 +1,5 @@
 import re
-
+# Hello, this is a comment
 # Read the original file contents
 with open("hsk6.txt", "r", encoding="utf-8") as file:
     original_text = file.read()
