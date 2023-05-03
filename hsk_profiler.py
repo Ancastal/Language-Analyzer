@@ -1,4 +1,5 @@
 import os
+print(f"Running {__file__}...")
 # Import the os module to allow for the definition of the path to the HSK level files
 # Define the path to the directory containing the HSK level files
 hsk_dir = os.path.dirname(__file__)
