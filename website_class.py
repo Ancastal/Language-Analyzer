@@ -136,20 +136,33 @@ class Website:
         self.st.header("Get Started")
         self.st.write("Ready to start analyzing text? Use the navigation menu at the top of the page to explore our different features and tools. If you have any questions or need help getting started, don't hesitate to reach out to us for support.")
     def show_bleu(self):
-
         self.st.title("BLEU Score")
         self.st.subheader("Calculate the BLEU score for machine translation evaluation")
         self.st.write("The BLEU score is a metric for evaluating the quality of machine translation.")
         self.st.write("It compares a candidate translation to one or more reference translations, and returns a score between 0 and 1. The higher the score, the better the translation.")
+        # Create two file uploaders in two columns
         col1, col2 = self.st.columns(2)
         with col1:
-            reference_text = self.st.text_area("Reference Text")
+            reference_file = self.st.file_uploader("Upload Reference Text", type=["txt"], key="reference")
+            if reference_file is None:
+                reference_text = self.st.text_area("Reference Text")
         with col2:
-            candidate_text = self.st.text_area("Candidate Text")
+            candidate_file = self.st.file_uploader("Upload Candidate Text", type=["txt"], key="candidate")
+            if candidate_file is None:
+                candidate_text = self.st.text_area("Candidate Text")
 
         # Calculate the BLEU score
         if self.st.button("Calculate BLEU Score"):
+            if reference_file is not None and candidate_file is not None:
+                reference_text = reference_file.read().decode("utf-8")
+                candidate_text = candidate_file.read().decode("utf-8")
+            elif reference_text and candidate_text:
+                pass
+            else:
+                self.st.write("Please upload both reference and candidate text files or enter text in the text areas.")
+                return
+
             reference_tokens = word_tokenize(reference_text)
             candidate_tokens = word_tokenize(candidate_text)
             bleu_score = bleu([reference_tokens], candidate_tokens)
-            self.st.subheader(f"BLEU Score: {bleu_score*100:.2f}%")
+            self.st.write(f"BLEU Score: {bleu_score}")
