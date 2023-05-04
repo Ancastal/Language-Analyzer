@@ -1,6 +1,7 @@
 from hsk_profiler import profile
-import string
 from textstat import textstat
+
+import string
 class Website:
     def __init__(self, st):
         self.st = st
@@ -81,7 +82,7 @@ class Website:
         # Add text area and button
         txt = self.st.text_area("Enter English text here:")
         if self.st.button('Analyze', key="analyze", help="Analyze the text and display the results."):
-            print(txt)
+
             fre = textstat.flesch_reading_ease(txt)
             fkg = textstat.flesch_kincaid_grade(txt)
             gf = textstat.gunning_fog(txt)
@@ -105,6 +106,7 @@ class Website:
                 self.st.write(get_readability_description(lwf, "Linsear Write Formula"))
             with self.st.expander(f"Automated Readability Index: {ari}"):
                 self.st.write(get_readability_description(ari, "Automated Readability Index"))
+
     def show_home(self):
         # Set page title and subtitle
         self.st.title("Welcome to Linguistic Analysis")
@@ -114,12 +116,12 @@ class Website:
         self.st.write("Linguistic Analysis is a website that provides advanced text analysis tools for multiple languages. From readability analysis to BLEU scores, our features are designed to give you a more in-depth understanding of your text data. Whether you're a language student, researcher, or data analyst, Linguistic Analysis can help you gain valuable insights from your text.")
 
         # Add a section about the features
-        ciau.st.header("Our Features")
-        ciau.st.write("At Linguistic Analysis, we offer a range of features for advanced text analysis, including:")
-        ciau.st.write("- HSK Profiling for Chinese language learners")
-        ciau.st.write("- Readability analysis for English texts")
-        ciau.st.write("- BLEU scores for machine translation evaluation")
-        ciau.st.write("And more! We're constantly updating our features to provide the most useful tools for our users.")
+        self.st.header("Our Features")
+        self.st.write("At Linguistic Analysis, we offer a range of features for advanced text analysis, including:")
+        self.st.write("- HSK Profiling for Chinese language learners")
+        self.st.write("- Readability analysis for English texts")
+        self.st.write("- BLEU scores for machine translation evaluation")
+        self.st.write("And more! We're constantly updating our features to provide the most useful tools for our users.")
 
         # Add a section about the creator
         self.st.header("About the Creator")
