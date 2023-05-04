@@ -3,8 +3,6 @@ from streamlit_option_menu import option_menu
 from website_class import Website
 
 st.set_page_config(page_title="Linguistic Analysis", page_icon=":book:", layout="wide")
-
-
 selected = option_menu(None, ["Home", "HSK Profiler", "Readability", "BLEU Scores" , "About"], orientation="horizontal")
 
 website = Website(st)
@@ -13,3 +11,5 @@ if selected == "HSK Profiler":
     website.show_hsk_profiler()
 elif selected == "Readability":
     website.show_readability()
+else:
+    website.show_home()

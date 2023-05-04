@@ -105,3 +105,26 @@ class Website:
                 self.st.write(get_readability_description(lwf, "Linsear Write Formula"))
             with self.st.expander(f"Automated Readability Index: {ari}"):
                 self.st.write(get_readability_description(ari, "Automated Readability Index"))
+    def show_home(self):
+        # Set page title and subtitle
+        self.st.title("Welcome to Linguistic Analysis")
+        self.st.subheader("A website for advanced text analysis in multiple languages")
+
+        # Add a description of the website
+        self.st.write("Linguistic Analysis is a website that provides advanced text analysis tools for multiple languages. From readability analysis to BLEU scores, our features are designed to give you a more in-depth understanding of your text data. Whether you're a language student, researcher, or data analyst, Linguistic Analysis can help you gain valuable insights from your text.")
+
+        # Add a section about the features
+        ciau.st.header("Our Features")
+        ciau.st.write("At Linguistic Analysis, we offer a range of features for advanced text analysis, including:")
+        ciau.st.write("- HSK Profiling for Chinese language learners")
+        ciau.st.write("- Readability analysis for English texts")
+        ciau.st.write("- BLEU scores for machine translation evaluation")
+        ciau.st.write("And more! We're constantly updating our features to provide the most useful tools for our users.")
+
+        # Add a section about the creator
+        self.st.header("About the Creator")
+        self.st.write("Linguistic Analysis was created by Ancastal, a Computational Linguist and Data Scientist with a passion for language and data analysis. If you have any questions or feedback, feel free to reach out to me on LinkedIn.")
+
+        # Add a call to action
+        self.st.header("Get Started")
+        self.st.write("Ready to start analyzing text? Use the navigation menu at the top of the page to explore our different features and tools. If you have any questions or need help getting started, don't hesitate to reach out to us for support.")
