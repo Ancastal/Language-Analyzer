@@ -12,10 +12,12 @@ GitPython==3.1.31
 idna==3.4
 importlib-metadata==6.6.0
 Jinja2==3.1.2
+joblib==1.2.0
 jsonschema==4.17.3
 markdown-it-py==2.2.0
 MarkupSafe==2.1.2
 mdurl==0.1.2
+nltk==3.8.1
 numpy==1.24.3
 packaging==23.1
 pandas==2.0.1
@@ -30,6 +32,7 @@ pyrsistent==0.19.3
 python-dateutil==2.8.2
 pytz==2023.3
 pytz-deprecation-shim==0.1.0.post0
+regex==2023.5.5
 requests==2.30.0
 rich==13.3.5
 six==1.16.0
@@ -41,6 +44,7 @@ textstat==0.7.3
 toml==0.10.2
 toolz==0.12.0
 tornado==6.3.1
+tqdm==4.65.0
 typing_extensions==4.5.0
 tzdata==2023.3
 tzlocal==4.3

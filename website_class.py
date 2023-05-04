@@ -1,5 +1,10 @@
 from hsk_profiler import profile
 from textstat import textstat
+from nltk import word_tokenize
+from nltk import bleu
+from nltk import download
+
+download('punkt')
 
 import string
 class Website:
@@ -130,3 +135,21 @@ class Website:
         # Add a call to action
         self.st.header("Get Started")
         self.st.write("Ready to start analyzing text? Use the navigation menu at the top of the page to explore our different features and tools. If you have any questions or need help getting started, don't hesitate to reach out to us for support.")
+    def show_bleu(self):
+
+        self.st.title("BLEU Score")
+        self.st.subheader("Calculate the BLEU score for machine translation evaluation")
+        self.st.write("The BLEU score is a metric for evaluating the quality of machine translation.")
+        self.st.write("It compares a candidate translation to one or more reference translations, and returns a score between 0 and 1. The higher the score, the better the translation.")
+        col1, col2 = self.st.columns(2)
+        with col1:
+            reference_text = self.st.text_area("Reference Text")
+        with col2:
+            candidate_text = self.st.text_area("Candidate Text")
+
+        # Calculate the BLEU score
+        if self.st.button("Calculate BLEU Score"):
+            reference_tokens = word_tokenize(reference_text)
+            candidate_tokens = word_tokenize(candidate_text)
+            bleu_score = bleu([reference_tokens], candidate_tokens)
+            self.st.subheader(f"BLEU Score: {bleu_score*100:.2f}%")
