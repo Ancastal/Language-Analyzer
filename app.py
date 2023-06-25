@@ -11,5 +11,7 @@ if selected == "HSK Profiler":
     website.show_hsk_profiler()
 elif selected == "Readability":
     website.show_readability()
+elif selected == "BLEU Scores":
+    website.show_bleu()
 else:
     website.show_home()

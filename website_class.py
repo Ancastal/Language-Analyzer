@@ -1,6 +1,12 @@
 from hsk_profiler import profile
-import string
 from textstat import textstat
+from nltk import word_tokenize
+from nltk import bleu
+from nltk import download
+
+download('punkt')
+
+import string
 class Website:
     def __init__(self, st):
         self.st = st
@@ -81,7 +87,7 @@ class Website:
         # Add text area and button
         txt = self.st.text_area("Enter English text here:")
         if self.st.button('Analyze', key="analyze", help="Analyze the text and display the results."):
-            print(txt)
+
             fre = textstat.flesch_reading_ease(txt)
             fkg = textstat.flesch_kincaid_grade(txt)
             gf = textstat.gunning_fog(txt)
@@ -105,6 +111,7 @@ class Website:
                 self.st.write(get_readability_description(lwf, "Linsear Write Formula"))
             with self.st.expander(f"Automated Readability Index: {ari}"):
                 self.st.write(get_readability_description(ari, "Automated Readability Index"))
+
     def show_home(self):
         # Set page title and subtitle
         self.st.title("Welcome to Linguistic Analysis")
@@ -114,12 +121,12 @@ class Website:
         self.st.write("Linguistic Analysis is a website that provides advanced text analysis tools for multiple languages. From readability analysis to BLEU scores, our features are designed to give you a more in-depth understanding of your text data. Whether you're a language student, researcher, or data analyst, Linguistic Analysis can help you gain valuable insights from your text.")
 
         # Add a section about the features
-        ciau.st.header("Our Features")
-        ciau.st.write("At Linguistic Analysis, we offer a range of features for advanced text analysis, including:")
-        ciau.st.write("- HSK Profiling for Chinese language learners")
-        ciau.st.write("- Readability analysis for English texts")
-        ciau.st.write("- BLEU scores for machine translation evaluation")
-        ciau.st.write("And more! We're constantly updating our features to provide the most useful tools for our users.")
+        self.st.header("Our Features")
+        self.st.write("At Linguistic Analysis, we offer a range of features for advanced text analysis, including:")
+        self.st.write("- HSK Profiling for Chinese language learners")
+        self.st.write("- Readability analysis for English texts")
+        self.st.write("- BLEU scores for machine translation evaluation")
+        self.st.write("And more! We're constantly updating our features to provide the most useful tools for our users.")
 
         # Add a section about the creator
         self.st.header("About the Creator")
@@ -128,3 +135,34 @@ class Website:
         # Add a call to action
         self.st.header("Get Started")
         self.st.write("Ready to start analyzing text? Use the navigation menu at the top of the page to explore our different features and tools. If you have any questions or need help getting started, don't hesitate to reach out to us for support.")
+    def show_bleu(self):
+        self.st.title("BLEU Score")
+        self.st.subheader("Calculate the BLEU score for machine translation evaluation")
+        self.st.write("The BLEU score is a metric for evaluating the quality of machine translation.")
+        self.st.write("It compares a candidate translation to one or more reference translations, and returns a score between 0 and 1. The higher the score, the better the translation.")
+        # Create two file uploaders in two columns
+        col1, col2 = self.st.columns(2)
+        with col1:
+            reference_file = self.st.file_uploader("Upload Reference Text", type=["txt"], key="reference")
+            if reference_file is None:
+                reference_text = self.st.text_area("Reference Text")
+        with col2:
+            candidate_file = self.st.file_uploader("Upload Candidate Text", type=["txt"], key="candidate")
+            if candidate_file is None:
+                candidate_text = self.st.text_area("Candidate Text")
+
+        # Calculate the BLEU score
+        if self.st.button("Calculate BLEU Score"):
+            if reference_file is not None and candidate_file is not None:
+                reference_text = reference_file.read().decode("utf-8")
+                candidate_text = candidate_file.read().decode("utf-8")
+            elif reference_text and candidate_text:
+                pass
+            else:
+                self.st.write("Please upload both reference and candidate text files or enter text in the text areas.")
+                return
+
+            reference_tokens = word_tokenize(reference_text)
+            candidate_tokens = word_tokenize(candidate_text)
+            bleu_score = bleu([reference_tokens], candidate_tokens)
+            self.st.write(f"BLEU Score: {bleu_score}")
