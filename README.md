@@ -9,7 +9,7 @@ English texts. This application is designed to give you a more in-depth
 understanding of your text data, whether you're a language student, 
 researcher, or data analyst.
 
-24/12/23 Edit: **This repo will soon a receive a complete revision and overhaul.**
+24/12/2023 Edit: **This repo will soon a receive a complete revision and overhaul.**
 
 ## Installation
 
